@@ -46,7 +46,7 @@
         $(document).ready(function () {
             $('#example').DataTable({
                 paging: false,
-                "ajax": { "url": "/output.json", "dataSrc": "" },
+                "ajax": { "url": "./output.json", "dataSrc": "", "cache": true },
                 "columns": [
                     { "data": "asin" },
                     { "data": "author" },
