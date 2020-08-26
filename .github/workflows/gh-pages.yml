@@ -15,6 +15,7 @@ jobs:
       - uses: actions/setup-python@v2
       - uses: dschep/install-pipenv-action@v1
       - run: pipenv install
+      - run: date -u +"%Y-%m-%dT%H:%M%Z" > public/update_time.txt
       - run: pipenv run scrapy crawl PrimeReading -o public/output.json
       - name: Deploy to GitHub Pages
         if: success()

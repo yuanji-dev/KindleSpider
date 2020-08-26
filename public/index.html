@@ -30,6 +30,8 @@
 <body>
     <header>
         <h1>Prime Readingの一覧・検索</h1>
+        <a style="float:right; background-color:aqua" href="https://github.com/masakichi/KindleSpider">更新時間：<span
+                id="update-time"></span></a>
     </header>
 
     <main>
@@ -71,6 +73,9 @@
                     { "data": "publish_date" },
                     { "data": "cover", "visible": false },
                 ]
+            });
+            $.get("./update_time.txt", function (data, _) {
+                $('#update-time').text(data);
             });
         });
     </script>
