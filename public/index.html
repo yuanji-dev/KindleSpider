@@ -65,7 +65,7 @@
                 },
                 "columns": [
                     { "data": "asin", "visible": false },
-                    { "data": "title", "render": function (data, type, row) { return `<a href="https://www.amazon.co.jp/dp/${row.asin}/" target="_blank">${data}</a>` }, "width": "40%" },
+                    { "data": "title", "render": function (data, type, row) { return `<div><a class="title" data-image="${row.cover}" href="https://www.amazon.co.jp/dp/${row.asin}/" target="_blank">${data}</a></div>` }, "width": "40%" },
                     { "data": "author" },
                     { "data": "star" },
                     { "data": "rating_count" },
@@ -78,6 +78,23 @@
                 $('#update-time').text(data);
             });
         });
+        $('#prime-reading').on('init.dt', function () {
+            $(".title").mouseenter(function (e) {
+                if ($(this).parent('div').children('div.image').length) {
+                    $(this).parent('div').children('div.image').css('left', e.offsetX);
+                    $(this).parent('div').children('div.image').show();
+                } else {
+                    var image_name = $(this).data('image');
+                    console.log(e.offsetX, e.offsetY);
+                    var imageTag = `<div class="image" style="position:absolute;left:${e.offsetX}">` + '<img src="' + image_name + '" alt="image" height="218" />' + '</div>';
+                    $(this).parent('div').append(imageTag);
+                }
+            });
+            $(".title").mouseleave(function () {
+                $(this).parent('div').children('div.image').hide();
+            });
+        });
+
     </script>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-50840195-3"></script>
